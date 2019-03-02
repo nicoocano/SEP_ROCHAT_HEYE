@@ -1,8 +1,10 @@
 package client;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledFuture;
 
+import main.Main;
 import service.GenerateurAsync;
 
 public class Afficheur implements ObservateurGenerateur {
@@ -17,15 +19,17 @@ public class Afficheur implements ObservateurGenerateur {
 		
 		ScheduledFuture<Integer> valueFuture= g.getValue();
 		int result;
-		try {
-			result = valueFuture.get();
-			g.remove();
-			System.out.println("GetValue pour : " +name + " : "+ result);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
+			try {
+				result = valueFuture.get();
+				System.out.println("GetValue pour : " +name + " : "+ result);
+				g.remove();
+			
+				//Main.writer.write(result +"\n");
+			} catch (InterruptedException | ExecutionException  e) {
+				e.printStackTrace();
+			}
+		
+
 	}
 
 }

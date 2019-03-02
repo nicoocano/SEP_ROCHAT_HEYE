@@ -29,21 +29,22 @@ public class GenerateurImpl implements Generateur {
 		//todo
 	}
 	public int getValue(ObservateurGenerateur o){
-		System.out.println("observateur");
 		algo.getValue(o);
 		return value;
 	}
 	
 	public void tick() {
-		
+		GenerateurImpl temp =this;
 		Main.scheduler.scheduleAtFixedRate(new Runnable() {
 			public void run() {
 				if(algo.getLocked()) {
 					value += 1;
 				}
+				algo.execute(temp);
+				
 			}
 		},0,1000,MILLISECONDS);
-		algo.execute(this);
+		
 		
 	}
 	public void remove(GenerateurObservateurAsync g) {
