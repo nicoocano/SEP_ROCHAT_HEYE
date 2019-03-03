@@ -24,8 +24,8 @@ public class Afficheur implements ObservateurGenerateur {
 				System.out.println("GetValue pour : " +name + " : "+ result);
 				g.remove();
 			
-				//Main.writer.write(result +"\n");
-			} catch (InterruptedException | ExecutionException  e) {
+				Main.writer.write(result +"\n");
+			} catch (InterruptedException | ExecutionException | IOException  e) {
 				e.printStackTrace();
 			}
 		

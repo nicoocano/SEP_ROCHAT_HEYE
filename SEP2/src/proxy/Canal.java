@@ -37,7 +37,6 @@ public class Canal implements GenerateurAsync, GenerateurObservateurAsync {
 	
 	
 	public ScheduledFuture <Integer> getValue(){
-		System.out.println("Canal");
 		ScheduledFuture<Integer> result = Main.scheduler.schedule(new Callable<Integer>() {
 			
 			public Integer call() {

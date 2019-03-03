@@ -2,9 +2,7 @@ package client;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.locks.Lock;
 
 import main.Main;
 import service.GenerateurObservateurAsync;
@@ -35,8 +33,9 @@ public class GenerateurImpl implements Generateur {
 	
 	public void tick() {
 		GenerateurImpl temp =this;
-		Main.scheduler.scheduleAtFixedRate(new Runnable() {
+		ScheduledFuture result = Main.scheduler.scheduleAtFixedRate(new Runnable() {
 			public void run() {
+				// si on est pas verrouillé
 				if(algo.getLocked()) {
 					value += 1;
 				}
@@ -45,7 +44,12 @@ public class GenerateurImpl implements Generateur {
 			}
 		},0,1000,MILLISECONDS);
 		
-		
+		 try {
+			Thread.sleep(9999);
+			result.cancel(true);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	public void remove(GenerateurObservateurAsync g) {
 		algo.remove(g);

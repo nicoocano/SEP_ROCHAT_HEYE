@@ -51,9 +51,7 @@ class algoAtomiqueTest {
 	@Test
 	void test() throws IOException {
 		
-		 for(int i=0; i<10; i++) {
-			 gen1.tick();
-			 }
+		 gen1.tick();
 		 Main.writer.close();
 		 InputStreamReader lecture=new InputStreamReader(new FileInputStream("./testAtomique"));
 		 BufferedReader buff=new BufferedReader(lecture);
