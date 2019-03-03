@@ -10,20 +10,27 @@ import service.GenerateurObservateurAsync;
 
 public class AlgoDiffusionSequentielle implements AlgoDiffusion{
 
+	private int nbUpdate;
 	private Set<GenerateurObservateurAsync> m_observateurs;
 	
 	public AlgoDiffusionSequentielle() {
-	
+		m_observateurs = new HashSet<GenerateurObservateurAsync>();
+		nbUpdate=0;
 	}
 	public boolean getLocked() {
-		return false;
+		return true;
 	}
 	public void execute(Generateur gen) {
-
+		if(nbUpdate==0) {
+			for(GenerateurObservateurAsync obs : m_observateurs ) {
+				nbUpdate++;
+				ScheduledFuture<Void>result = obs.update(gen);
+			}
+		}
 	}
 	
 	public void getValue(ObservateurGenerateur o) {
-		
+		nbUpdate--;
 	}
 	
 	public void attach(GenerateurObservateurAsync obs) {

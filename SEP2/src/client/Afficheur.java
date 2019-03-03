@@ -26,7 +26,7 @@ public class Afficheur implements ObservateurGenerateur {
 			
 				Main.writer.write(result +"\n");
 			} catch (InterruptedException | ExecutionException | IOException  e) {
-				e.printStackTrace();
+				
 			}
 		
 

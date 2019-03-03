@@ -26,15 +26,17 @@ public class AlgoDiffusionAtomique implements AlgoDiffusion {
 		return m_observateurs_waiting.size() == 0;
 	}
 	public void execute(Generateur gen) {
-
-		for(GenerateurObservateurAsync obs : m_observateurs ) {
-			m_observateurs_waiting.add(obs);
-			ScheduledFuture<Void>result = obs.update(gen);
+		if(nbUpdate == 0) {
+			for(GenerateurObservateurAsync obs : m_observateurs ) {
+				nbUpdate++;
+				m_observateurs_waiting.add(obs);
+				ScheduledFuture<Void>result = obs.update(gen);
+			}
 		}
 	}
 	
 	public void getValue(ObservateurGenerateur o) {
-		nbUpdate++;
+		nbUpdate--;
 	}
 	
 	public void attach(GenerateurObservateurAsync obs) {

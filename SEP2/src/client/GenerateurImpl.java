@@ -11,7 +11,7 @@ import strategy.AlgoDiffusion;
 public class GenerateurImpl implements Generateur {
 	private AlgoDiffusion algo;
 	private String name;
-	int value;
+	public int value;
 
 	
 	public GenerateurImpl(AlgoDiffusion alg, String n) {
@@ -42,14 +42,17 @@ public class GenerateurImpl implements Generateur {
 				algo.execute(temp);
 				
 			}
-		},0,1000,MILLISECONDS);
+		},0,500,MILLISECONDS);
 		
-		 try {
+	    try {
 			Thread.sleep(9999);
-			result.cancel(true);
+			Main.scheduler.shutdown();
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 	public void remove(GenerateurObservateurAsync g) {
 		algo.remove(g);
